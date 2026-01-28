@@ -1,0 +1,20 @@
+[
+  {
+    "id": "seed-1",
+    "name": "Classic Haircut",
+    "price": "$40",
+    "desc": "Precision clipper or scissor cut, finished with a hot towel and neck shave."
+  },
+  {
+    "id": "seed-2",
+    "name": "Hot Towel Shave",
+    "price": "$35",
+    "desc": "Traditional straight razor shave with essential oils and hot towels."
+  },
+  {
+    "id": "1769568616265",
+    "name": "New Hair Cut ",
+    "price": "$30",
+    "desc": "discount on our new hair cut service "
+  }
+]

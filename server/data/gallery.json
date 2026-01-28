@@ -1,0 +1,18 @@
+[
+  {
+    "id": "gallery-1",
+    "url": "assets/service_haircut.png"
+  },
+  {
+    "id": "gallery-2",
+    "url": "assets/service_shave.png"
+  },
+  {
+    "id": "gallery-3",
+    "url": "assets/gallery_tools.png"
+  },
+  {
+    "id": "gallery-4",
+    "url": "assets/gallery_interior_1.png"
+  }
+]

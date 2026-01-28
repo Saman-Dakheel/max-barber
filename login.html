@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | Max Barber</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            background: #0a0a0a;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+
+        .login-card {
+            background: #1a1a1a;
+            padding: 3rem;
+            border-radius: 12px;
+            border: 1px solid #333;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .login-card h1 {
+            color: #c5a059;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            color: #888;
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            background: #222;
+            border: 1px solid #444;
+            color: #fff;
+            border-radius: 4px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #c5a059;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 12px;
+            background: #c5a059;
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .btn-login:hover {
+            background: #e6c17a;
+            transform: translateY(-2px);
+        }
+
+        #error-msg {
+            color: #ff6b6b;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="login-card">
+            <img src="assets/logo.png" alt="Logo" style="height: 60px; margin-bottom: 1rem;">
+            <h1>Admin Access</h1>
+            <form id="login-form">
+                <div class="input-group">
+                    <label>Admin Secret</label>
+                    <input type="password" id="secret" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn-login">Unlock Dashboard</button>
+                <div id="error-msg">Invalid secret. Please try again.</div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        // Proactive redirect if already logged in
+        if (localStorage.getItem('adminSecret')) {
+            window.location.href = 'admin.html';
+        }
+
+        const form = document.getElementById('login-form');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const secret = document.getElementById('secret').value;
+
+            // Simple verification against server
+            try {
+                const res = await fetch('/api/bookings', {
+                    headers: { 'x-admin-secret': secret }
+                });
+
+                if (res.status === 200) {
+                    localStorage.setItem('adminSecret', secret);
+                    window.location.href = 'admin.html';
+                } else {
+                    document.getElementById('error-msg').style.display = 'block';
+                }
+            } catch (err) {
+                alert('Connection error. Is the server running?');
+            }
+        });
+    </script>
+</body>
+
+</html>

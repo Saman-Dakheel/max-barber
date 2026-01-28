@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Max Barber</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .admin-nav {
+            background: #121212;
+            padding: 1rem 0;
+            border-bottom: 1px solid #c5a059;
+            margin-bottom: 2rem;
+        }
+
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .admin-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .admin-card h2 {
+            color: #c5a059;
+            margin-bottom: 1.5rem;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 0.5rem;
+        }
+
+        .admin-table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            color: #ccc;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #333;
+        }
+
+        th {
+            color: #fff;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .btn-delete {
+            background: #802e2e;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: 0.3s;
+        }
+
+        .btn-delete:hover {
+            background: #a33a3a;
+        }
+
+        .btn-confirm {
+            background: #c5a059;
+            color: #000;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: 0.3s;
+            margin-right: 5px;
+            font-weight: 700;
+        }
+
+        .btn-confirm:hover {
+            background: #e6c17a;
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            background: #444;
+            color: #fff;
+        }
+
+        .status-confirmed {
+            background: #c5a059;
+            color: #000;
+        }
+
+        .form-message {
+            margin-top: 1rem;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            text-align: center;
+            display: none;
+        }
+
+        .form-message.success {
+            background: rgba(197, 160, 89, 0.2);
+            color: #c5a059;
+            border: 1px solid #c5a059;
+        }
+
+        .form-message.error {
+            background: rgba(128, 46, 46, 0.2);
+            color: #ff6b6b;
+            border: 1px solid #802e2e;
+        }
+
+        /* Visual Gallery Grid */
+        .gallery-manage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .gallery-manage-card {
+            background: #222;
+            border: 1px solid #333;
+            border-radius: 6px;
+            overflow: hidden;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .gallery-manage-card:hover {
+            border-color: #c5a059;
+            transform: translateY(-5px);
+        }
+
+        .gallery-manage-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+        }
+
+        .gallery-manage-actions {
+            padding: 10px;
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+        }
+
+        /* Activity Feed */
+        .activity-feed {
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .activity-item {
+            padding: 10px;
+            border-bottom: 1px solid #333;
+            font-size: 0.85rem;
+            color: #ccc;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-time {
+            color: #c5a059;
+            font-size: 0.75rem;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        /* Responsive Admin Adjustments */
+        @media (max-width: 768px) {
+            .admin-container {
+                padding: 0 10px;
+            }
+
+            .admin-card {
+                padding: 1rem;
+            }
+
+            .admin-card h2 {
+                font-size: 1.2rem;
+            }
+
+            th,
+            td {
+                padding: 8px;
+                font-size: 0.85rem;
+            }
+
+            .btn-confirm,
+            .btn-delete {
+                padding: 4px 6px;
+                font-size: 0.7rem;
+            }
+
+            /* Add-service form adjustments */
+            #add-service-form {
+                grid-template-columns: 1fr !important;
+            }
+
+            /* Ensure tables don't break layout */
+            .admin-table-wrapper {
+                margin: 0 -10px;
+                padding: 0 10px;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+
+        /* Modal Style */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body style="background-color: #0c0c0c; color: #fff;">
+    <header class="admin-nav">
+        <div class="admin-container">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="index.html" class="logo">
+                    <img src="assets/logo.png" alt="Max Barber Logo" style="height: 50px;">
+                </a>
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <h1 style="font-family: 'Oswald', sans-serif; font-size: 1.2rem; display: none;">Admin</h1>
+                    <button id="logout-btn" class="btn-delete"
+                        style="padding: 5px 15px; font-weight: 700;">LOGOUT</button>
+                    <h1 style="font-family: 'Oswald', sans-serif; font-size: 1.5rem;">Admin Dashboard</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="admin-container">
+        <!-- Stats Overview -->
+        <div
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+            <div class="admin-card" style="text-align: center; border-left: 4px solid #c5a059;">
+                <p style="color: #888; font-size: 0.8rem; text-transform: uppercase;">Today's Bookings</p>
+                <h3 id="stat-bookings" style="font-size: 2rem; color: #fff; font-family: 'Oswald';">0</h3>
+            </div>
+            <div class="admin-card" style="text-align: center; border-left: 4px solid #c5a059;">
+                <p style="color: #888; font-size: 0.8rem; text-transform: uppercase;">Active Services</p>
+                <h3 id="stat-services" style="font-size: 2rem; color: #fff; font-family: 'Oswald';">0</h3>
+            </div>
+            <div class="admin-card" style="text-align: center; border-left: 4px solid #c5a059;">
+                <p style="color: #888; font-size: 0.8rem; text-transform: uppercase;">Gallery Photos</p>
+                <h3 id="stat-gallery" style="font-size: 2rem; color: #fff; font-family: 'Oswald';">0</h3>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin-bottom: 2rem;"
+            class="dashboard-top-grid">
+            <!-- Booking Trends -->
+            <section class="admin-card">
+                <h2>Booking Trends (Weekly)</h2>
+                <div style="height: 250px; position: relative;">
+                    <canvas id="bookingChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Activity Feed -->
+            <section class="admin-card">
+                <h2>Recent Activity</h2>
+                <div class="activity-feed" id="activity-list">
+                    <p style="color: #666; font-style: italic;">Loading activity...</p>
+                </div>
+            </section>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Bookings -->
+            <section class="admin-card">
+                <h2>Manage Bookings</h2>
+                <div class="admin-table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Client</th>
+                                <th>Service</th>
+                                <th>Date/Time</th>
+                                <th>Contact</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookings-list"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Services -->
+            <section class="admin-card">
+                <h2>Manage Services</h2>
+                <form id="add-service-form"
+                    style="margin-bottom: 2rem; display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 10px;">
+                    <input type="text" id="service-name" placeholder="Service Name" required
+                        style="padding: 10px; background: #222; border: 1px solid #444; color: white;">
+                    <input type="text" id="service-price" placeholder="Price" required
+                        style="padding: 10px; background: #222; border: 1px solid #444; color: white;">
+                    <input type="text" id="service-desc" placeholder="Brief Description" required
+                        style="padding: 10px; background: #222; border: 1px solid #444; color: white;">
+                    <button type="submit" class="btn-confirm">Add</button>
+                </form>
+                <div class="admin-table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Description</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="services-list"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Gallery -->
+            <section class="admin-card">
+                <h2>Manage Gallery</h2>
+                <form id="add-gallery-form"
+                    style="margin-bottom: 2rem; display: grid; grid-template-columns: 1fr auto; gap: 10px;">
+                    <input type="text" id="gallery-url" placeholder="Image URL" required
+                        style="padding: 10px; background: #222; border: 1px solid #444; color: white;">
+                    <button type="submit" class="btn-confirm">Add Image</button>
+                </form>
+                <div id="gallery-preview-container"></div>
+                <!-- Redesigned Visual Gallery Grid -->
+                <div id="gallery-manage-grid" class="gallery-manage-grid">
+                    <p style="color: #666; font-style: italic;">Loading gallery pictures...</p>
+                </div>
+            </section>
+
+            <!-- Testimonials -->
+            <section class="admin-card">
+                <h2>Manage Testimonials</h2>
+                <div class="admin-table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Client</th>
+                                <th>Role</th>
+                                <th>Story</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="testimonials-list"></tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Global Edit Modal -->
+    <div id="edit-modal" class="modal-overlay">
+        <div class="admin-card"
+            style="width: 90%; max-width: 500px; position: relative; background: #1a1a1a; border: 2px solid #c5a059;">
+            <button onclick="closeEditModal()"
+                style="position: absolute; right: 20px; top: 15px; background: none; border: none; color: #fff; cursor: pointer; font-size: 2rem;">&times;</button>
+            <h2 id="edit-modal-title" style="color: #c5a059; border-bottom: 1px solid #333; margin-bottom: 20px;">Edit
+                Item</h2>
+            <form id="edit-service-form" style="display: flex; flex-direction: column; gap: 15px;">
+                <input type="hidden" id="edit-id">
+                <input type="hidden" id="edit-type">
+
+                <div id="edit-name-group" style="display: flex; flex-direction: column; gap: 5px;">
+                    <label style="font-size: 0.8rem; color: #888;">Service Name</label>
+                    <input type="text" id="edit-name"
+                        style="padding: 10px; background: #222; border: 1px solid #444; color: white;">
+                </div>
+
+                <div id="edit-price-group" style="display: flex; flex-direction: column; gap: 5px;">
+                    <label style="font-size: 0.8rem; color: #888;">Price</label>
+                    <input type="text" id="edit-price"
+                        style="padding: 10px; background: #222; border: 1px solid #444; color: white;">
+                </div>
+
+                <div id="edit-desc-group" style="display: flex; flex-direction: column; gap: 5px;">
+                    <label id="edit-label-desc" style="font-size: 0.8rem; color: #888;">Description</label>
+                    <textarea id="edit-desc"
+                        style="padding: 10px; background: #222; border: 1px solid #444; color: white; height: 100px;"></textarea>
+                </div>
+
+                <button type="submit" class="btn-confirm" style="width: 100%; margin-top: 10px; padding: 12px;">Save
+                    Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="admin.js?v=4.0"></script>
+    <script>lucide.createIcons();</script>
+</body>
+
+</html>

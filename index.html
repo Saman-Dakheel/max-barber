@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Max Barber | Luxury Grooming</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <img src="assets/logo.png" alt="Max Barber Logo">
+            </a>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#services" class="nav-link">Services</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#gallery" class="nav-link">Gallery</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="booking.html" class="btn-primary">Book Now</a>
+            <div class="mobile-menu-toggle">
+                <i data-lucide="menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-bg">
+                <img src="assets/hero_bg.png" alt="Barbershop Interior">
+            </div>
+            <div class="hero-overlay"></div>
+            <div class="container hero-content">
+                <h1 class="hero-title">Experience the Art of <br> <span class="gold-text">Grooming</span></h1>
+                <p class="hero-subtitle">Premium cuts, classic shaves, and a timeless atmosphere.</p>
+                <div class="hero-buttons">
+                    <a href="booking.html" class="btn-primary">Book Appointment</a>
+                    <a href="#services" class="btn-secondary">View Services</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="section">
+            <div class="container">
+                <h2 class="section-title">Our Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img src="assets/service_haircut.png" alt="Classic Haircut">
+                        </div>
+                        <div class="service-info">
+                            <h3>Classic Haircut</h3>
+                            <p class="service-desc">Precision clipper or scissor cut, finished with a hot towel and neck
+                                shave.</p>
+                            <span class="price">$45</span>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img src="assets/service_shave.png" alt="Hot Towel Shave">
+                        </div>
+                        <div class="service-info">
+                            <h3>Hot Towel Shave</h3>
+                            <p class="service-desc">Traditional straight razor shave with essential oils and hot towels.
+                            </p>
+                            <span class="price">$35</span>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-img">
+                            <!-- Reusing logo for a generic placeholder or tools image if specific one runs out, but here I'll use tools image for beard trim as it fits -->
+                            <img src="assets/gallery_tools.png" alt="Beard Trim">
+                        </div>
+                        <div class="service-info">
+                            <h3>Beard Detail</h3>
+                            <p class="service-desc">Sculpting and conditioning for the modern gentleman's beard.</p>
+                            <span class="price">$25</span>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img src="assets/hero_bg.png" alt="The Max Experience" style="object-position: center;">
+                        </div>
+                        <div class="service-info">
+                            <h3>The Max Experience</h3>
+                            <p class="service-desc">Full haircut, hot towel shave, and scalp massage. The ultimate
+                                treat.</p>
+                            <span class="price">$75</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section about-section">
+            <div class="container about-container">
+                <div class="about-text">
+                    <h2 class="section-title" style="text-align: left;">Legacy of <br>Excellence</h2>
+                    <p>Established in 2015, Max Barber was born from a desire to bring back the lost art of gentleman's
+                        grooming. We believe a haircut is not just a chore—it's a ritual.</p>
+                    <p>Our barbers are artisans, trained in both classic techniques and modern styles. When you sit in
+                        our chair, you aren't just a customer; you're a patron of the craft.</p>
+                    <p class="more-text">
+                        From the moment you walk through our doors, you are transported to a time when service was
+                        paramount.
+                        We use only the finest products and tools, ensuring that every cut, shave, and trim is performed
+                        with
+                        absolute precision. Whether you are preparing for a wedding, a business meeting, or simply need
+                        to
+                        look your best, Max Barber is here to serve you.
+                    </p>
+                    <button id="read-more-btn" class="btn-primary" style="margin-top: 2rem;">Read Our Story</button>
+                </div>
+                <div class="about-img">
+                    <img src="assets/gallery_interior_1.png" alt="Barbershop Interior">
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="section" style="background-color: #121212;">
+            <div class="container">
+                <div class="div-block-header"
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem;">
+                    <h2 class="section-title" style="margin-bottom: 0;">Client Stories</h2>
+                    <button id="add-story-btn" class="btn-secondary">Add Your Story</button>
+                </div>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"I've been going to Max for years. The attention to detail is
+                            unmatched. It's not just a haircut, it's an experience."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <img src="assets/gallery_interior_1.png" alt="James Carter">
+                            </div>
+                            <div class="author-info">
+                                <h4>James Carter</h4>
+                                <span>Regular Client</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Best hot towel shave in the city. The atmosphere is classic and
+                            relaxing. Highly recommended."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <img src="assets/service_shave.png" alt="Michael Ross">
+                            </div>
+                            <div class="author-info">
+                                <h4>Michael Ross</h4>
+                                <span>Executive</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Finally found a barber who understands how to trim a beard
+                            properly. Max Barber is top tier."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <img src="assets/gallery_tools.png" alt="David Chen">
+                            </div>
+                            <div class="author-info">
+                                <h4>David Chen</h4>
+                                <span>Artist</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="section">
+            <div class="container">
+                <h2 class="section-title">Gallery</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item"><img src="assets/service_haircut.png" alt="Work 1"></div>
+                    <div class="gallery-item"><img src="assets/service_shave.png" alt="Work 2"></div>
+                    <div class="gallery-item"><img src="assets/gallery_tools.png" alt="Work 3"></div>
+                    <div class="gallery-item"><img src="assets/gallery_interior_1.png" alt="Work 4"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section contact-section">
+            <div class="container contact-container">
+                <div class="contact-info">
+                    <h2 class="section-title" style="text-align: left;">Visit Us</h2>
+                    <div class="info-item">
+                        <i data-lucide="map-pin"></i>
+                        <p>4 Catto Street, Centenary Heights QLD 4350</p>
+                    </div>
+                    <div class="info-item">
+                        <i data-lucide="phone"></i>
+                        <p>(+61) 416 763 389</p>
+                    </div>
+                    <div class="info-item">
+                        <i data-lucide="clock"></i>
+                        <div>
+                            <p>Mon - Fri: 10am - 8pm</p>
+                            <p>Sat: 9am - 6pm</p>
+                            <p>Sun: Closed</p>
+                        </div>
+                    </div>
+                    <div class="social-links" style="margin-top: 2rem;">
+                        <i data-lucide="instagram"></i>
+                        <i data-lucide="facebook"></i>
+                        <i data-lucide="twitter"></i>
+                    </div>
+                </div>
+                <div class="map">
+                    <!-- Updated map to new address with Hybrid (Satellite + Labels) view and removed filters for clarity -->
+                    <iframe
+                        src="https://maps.google.com/maps?q=4+Catto+Street,+Centenary+Heights+QLD+4350&t=h&z=15&ie=UTF8&iwloc=&output=embed"
+                        width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Add Story Modal -->
+    <div id="story-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="section-title" style="font-size: 2rem; margin-bottom: 1.5rem;">Share Your Experience</h2>
+            <form id="story-form" class="booking-form" style="padding: 1.5rem; box-shadow: none; border: none;">
+                <div class="form-group">
+                    <label for="client-name">Name</label>
+                    <input type="text" id="client-name" required placeholder="Your Name">
+                </div>
+                <div class="form-group">
+                    <label for="client-role">Role (Optional)</label>
+                    <input type="text" id="client-role" placeholder="e.g. Regular Client">
+                </div>
+                <div class="form-group">
+                    <label for="client-story">Your Story</label>
+                    <textarea id="client-story" rows="2" required
+                        placeholder="Tell us about your experience..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%;">Submit Story</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Lightbox (Moved from JS) -->
+    <div id="lightbox" class="lightbox" style="display: none;">
+        <div class="lightbox-content">
+            <button class="lightbox-close">&times;</button>
+            <img src="" alt="Gallery Image">
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container" style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+            <p>&copy; 2026 Max Barber. All rights reserved.</p>
+            <a href="admin.html" style="color: rgba(255,255,255,0.4); font-size: 0.8rem; text-decoration: none;">Admin
+                Access</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
